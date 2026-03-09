@@ -253,7 +253,7 @@ const TaskTimeline: React.FC<TaskTimelineProps> = ({ taskUid, refreshKey }) => {
     }
 
     return (
-        <div className="max-h-[36rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
+        <div className="max-h-[36rem] overflow-y-auto">
             <div className="space-y-2">
                 {events.map((event) => (
                     <div key={event.id} className="relative">

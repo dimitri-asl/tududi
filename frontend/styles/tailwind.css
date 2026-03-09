@@ -7,6 +7,34 @@
     /* Scale down everything by 10% by setting base font-size to 90% */
     font-size: 90%;
   }
+
+  /* Themed scrollbars for all scrollable elements */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent; /* gray-300 thumb, transparent track */
+  }
+
+  .dark * {
+    scrollbar-color: #4b5563 transparent; /* gray-600 thumb, transparent track */
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #d1d5db; /* gray-300 */
+    border-radius: 3px;
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* gray-600 */
+  }
 }
 
 .spinner {

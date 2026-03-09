@@ -11,6 +11,8 @@ import {
     XCircleIcon,
     ChartBarIcon,
     CheckIcon,
+    Squares2X2Icon,
+    ListBulletIcon,
 } from '@heroicons/react/24/outline';
 import { useToast } from '../Shared/ToastContext';
 import ProjectModal from './ProjectModal';
@@ -72,6 +74,7 @@ const ProjectDetails: React.FC = () => {
         return (saved as 'all' | 'active' | 'completed') || 'active';
     });
     const [showMetrics, setShowMetrics] = useState(true);
+    const [viewMode, setViewMode] = useState<'list' | 'board'>('list');
     const [showAutoSuggestForm, setShowAutoSuggestForm] = useState(false);
     const [autoSuggestEnabled, setAutoSuggestEnabled] = useState(false);
     const hasCheckedAutoSuggest = useRef(false);
@@ -231,6 +234,9 @@ const ProjectDetails: React.FC = () => {
                 const projectData = await fetchProjectBySlug(uidSlug);
                 setProject(projectData);
                 setTasks(projectData.tasks || projectData.Tasks || []);
+                if (projectData.task_view_mode === 'board') {
+                    setViewMode('board');
+                }
                 const savedSort = localStorage.getItem('project_order_by');
                 if (!savedSort && projectData.task_sort_order) {
                     setOrderBy(projectData.task_sort_order);
@@ -926,6 +932,55 @@ const ProjectDetails: React.FC = () => {
                                         />
                                     </button>
                                     <button
+                                        onClick={() => {
+                                            const next =
+                                                viewMode === 'list'
+                                                    ? 'board'
+                                                    : 'list';
+                                            setViewMode(next);
+                                            if (project?.uid) {
+                                                updateProject(project.uid, {
+                                                    ...project,
+                                                    task_view_mode: next,
+                                                });
+                                            }
+                                        }}
+                                        className={`flex items-center transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset rounded-lg p-1.5 sm:p-2 ${
+                                            viewMode === 'board'
+                                                ? 'bg-blue-100 dark:bg-blue-900/30 shadow-sm'
+                                                : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                        }`}
+                                        aria-pressed={viewMode === 'board'}
+                                        aria-label={
+                                            viewMode === 'board'
+                                                ? t(
+                                                      'project.viewList',
+                                                      'Switch to list view'
+                                                  )
+                                                : t(
+                                                      'project.viewBoard',
+                                                      'Switch to board view'
+                                                  )
+                                        }
+                                        title={
+                                            viewMode === 'board'
+                                                ? t(
+                                                      'project.viewList',
+                                                      'Switch to list view'
+                                                  )
+                                                : t(
+                                                      'project.viewBoard',
+                                                      'Switch to board view'
+                                                  )
+                                        }
+                                    >
+                                        {viewMode === 'board' ? (
+                                            <ListBulletIcon className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-200" />
+                                        ) : (
+                                            <Squares2X2Icon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-200" />
+                                        )}
+                                    </button>
+                                    <button
                                         onClick={() =>
                                             setIsSearchExpanded((v) => !v)
                                         }
@@ -1031,6 +1086,7 @@ const ProjectDetails: React.FC = () => {
                                                 taskStatusFilter !== 'active'
                                             }
                                             taskSearchQuery={taskSearchQuery}
+                                            viewMode={viewMode}
                                             t={t}
                                         />
                                     </div>

@@ -156,6 +156,7 @@ interface TaskItemProps {
     onToggleToday?: (taskId: number, task?: Task) => Promise<void>;
     isUpcomingView?: boolean;
     showCompletedTasks?: boolean;
+    hideStatusControl?: boolean;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({
@@ -168,6 +169,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
     onToggleToday,
     isUpcomingView = false,
     showCompletedTasks = false,
+    hideStatusControl = false,
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -391,7 +393,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                     task={task}
                     project={project}
                     onTaskClick={handleTaskClick}
-                    onToggleCompletion={handleToggleCompletion}
+                    onToggleCompletion={hideStatusControl ? undefined : handleToggleCompletion}
                     hideProjectName={hideProjectName}
                     onToggleToday={onToggleToday}
                     onTaskUpdate={onTaskUpdate}

@@ -341,6 +341,8 @@ class ProjectsService {
         if (image_url !== undefined) updateData.image_url = image_url;
         if (status !== undefined) updateData.status = status;
         else if (state !== undefined) updateData.status = state;
+        if (data.task_view_mode !== undefined)
+            updateData.task_view_mode = data.task_view_mode;
 
         await projectsRepository.update(project, updateData);
         await updateProjectTags(project, tagsData, userId);

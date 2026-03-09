@@ -71,6 +71,11 @@ module.exports = (sequelize) => {
                 allowNull: true,
                 defaultValue: 'created_at:desc',
             },
+            task_view_mode: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: 'list',
+            },
             status: {
                 type: DataTypes.ENUM(
                     'not_started',

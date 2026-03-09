@@ -4,6 +4,7 @@ import { Task } from '../../entities/Task';
 import AutoSuggestNextActionBox from './AutoSuggestNextActionBox';
 import NewTask from '../Task/NewTask';
 import TaskList from '../Task/TaskList';
+import KanbanBoard from '../Task/KanbanBoard';
 import { TFunction } from 'i18next';
 
 interface ProjectTasksSectionProps {
@@ -20,6 +21,7 @@ interface ProjectTasksSectionProps {
     allProjects: Project[];
     showCompleted: boolean;
     taskSearchQuery: string;
+    viewMode?: 'list' | 'board';
     t: TFunction;
 }
 
@@ -37,6 +39,7 @@ const ProjectTasksSection: React.FC<ProjectTasksSectionProps> = ({
     allProjects,
     showCompleted,
     taskSearchQuery,
+    viewMode = 'list',
     t,
 }) => {
     return (
@@ -59,7 +62,18 @@ const ProjectTasksSection: React.FC<ProjectTasksSectionProps> = ({
             </div>
 
             <div className="transition-all duration-300 ease-in-out overflow-visible">
-                {displayTasks.length > 0 ? (
+                {viewMode === 'board' ? (
+                    <KanbanBoard
+                        tasks={displayTasks}
+                        onTaskUpdate={onTaskUpdate}
+                        onTaskCompletionToggle={onTaskCompletionToggle}
+                        onTaskDelete={onTaskDelete}
+                        projects={allProjects}
+                        onToggleToday={onToggleToday}
+                        showCompletedTasks={showCompleted}
+                        t={t}
+                    />
+                ) : displayTasks.length > 0 ? (
                     <div className="transition-all duration-300 ease-in-out opacity-100 transform translate-y-0 overflow-visible">
                         <TaskList
                             tasks={displayTasks}

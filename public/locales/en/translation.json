@@ -574,7 +574,12 @@
     "createSuccess": "Project created successfully!",
     "createdAndAssigned": "Project created and assigned",
     "createError": "Failed to create project",
-    "viewProject": "Go to project"
+    "viewProject": "Go to project",
+    "viewList": "Switch to list view",
+    "viewBoard": "Switch to board view",
+    "kanban": {
+      "emptyColumn": "No tasks"
+    }
   },
   "errors": {
     "required": "This field is required",

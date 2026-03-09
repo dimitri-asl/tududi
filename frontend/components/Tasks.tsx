@@ -19,7 +19,10 @@ import {
     InformationCircleIcon,
     MagnifyingGlassIcon,
     CheckIcon,
+    Squares2X2Icon,
+    ListBulletIcon,
 } from '@heroicons/react/24/outline';
+import KanbanBoard from './Task/KanbanBoard';
 import { getApiPath } from '../config/paths';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -54,6 +57,11 @@ const Tasks: React.FC = () => {
     const [showCompleted, setShowCompleted] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [groupBy, setGroupBy] = useState<'none' | 'project'>('none');
+    const [viewMode, setViewMode] = useState<'list' | 'board'>(
+        () =>
+            (localStorage.getItem('tasks_view_mode') as 'list' | 'board') ||
+            'list'
+    );
 
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(false);
@@ -585,6 +593,62 @@ const Tasks: React.FC = () => {
                                 </span>
                             </button>
                         )}
+                        {!isUpcomingView && (
+                            <button
+                                onClick={() => {
+                                    const next =
+                                        viewMode === 'list'
+                                            ? 'board'
+                                            : 'list';
+                                    setViewMode(next);
+                                    localStorage.setItem(
+                                        'tasks_view_mode',
+                                        next
+                                    );
+                                    if (next === 'board') {
+                                        setGroupBy('none');
+                                        localStorage.setItem(
+                                            'tasks_group_by',
+                                            'none'
+                                        );
+                                    }
+                                }}
+                                className={`flex items-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-lg p-2 ${
+                                    viewMode === 'board'
+                                        ? 'bg-blue-100 dark:bg-blue-900/30 shadow-sm'
+                                        : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                }`}
+                                aria-pressed={viewMode === 'board'}
+                                aria-label={
+                                    viewMode === 'board'
+                                        ? t(
+                                              'project.viewList',
+                                              'Switch to list view'
+                                          )
+                                        : t(
+                                              'project.viewBoard',
+                                              'Switch to board view'
+                                          )
+                                }
+                                title={
+                                    viewMode === 'board'
+                                        ? t(
+                                              'project.viewList',
+                                              'Switch to list view'
+                                          )
+                                        : t(
+                                              'project.viewBoard',
+                                              'Switch to board view'
+                                          )
+                                }
+                            >
+                                {viewMode === 'board' ? (
+                                    <ListBulletIcon className="h-5 w-5 text-blue-600 dark:text-blue-200" />
+                                ) : (
+                                    <Squares2X2Icon className="h-5 w-5 text-gray-600 dark:text-gray-200" />
+                                )}
+                            </button>
+                        )}
                         <IconSortDropdown
                             options={sortOptions}
                             value={orderBy}
@@ -595,7 +659,7 @@ const Tasks: React.FC = () => {
                             align="right"
                             footerContent={
                                 <div className="space-y-3">
-                                    {!isUpcomingView && (
+                                    {!isUpcomingView && viewMode !== 'board' && (
                                         <div>
                                             <div className="px-3 py-2 text-xs font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
                                                 {t('tasks.groupBy', 'Group by')}
@@ -911,6 +975,18 @@ const Tasks: React.FC = () => {
                                         onToggleToday={undefined}
                                         showCompletedTasks={showCompleted}
                                         searchQuery={taskSearchQuery}
+                                    />
+                                ) : viewMode === 'board' ? (
+                                    <KanbanBoard
+                                        tasks={displayTasks}
+                                        onTaskUpdate={handleTaskUpdate}
+                                        onTaskCompletionToggle={
+                                            handleTaskCompletionToggle
+                                        }
+                                        onTaskDelete={handleTaskDelete}
+                                        projects={projects}
+                                        showCompletedTasks={showCompleted}
+                                        t={t}
                                     />
                                 ) : groupBy === 'project' ? (
                                     <GroupedTaskList

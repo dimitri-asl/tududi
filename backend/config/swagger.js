@@ -26,7 +26,7 @@ const options = {
                 description: `Backend server (base path ${API_BASE_PATH})`,
             },
             {
-                url: 'http://localhost:8080',
+                url: 'http://localhost:8090',
                 description: `Frontend dev server (proxy to ${API_BASE_PATH})`,
             },
         ],

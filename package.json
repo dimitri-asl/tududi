@@ -58,7 +58,7 @@
     "format": "npm run frontend:format && npm run backend:format",
     "format:fix": "npm run frontend:format:fix && npm run backend:format:fix",
     "docker:test-build": "bash scripts/test-docker-build.sh",
-    "kill:all": "lsof -ti:8080,3002 | xargs kill -9 2>/dev/null || true"
+    "kill:all": "lsof -ti:8090,3002 | xargs kill -9 2>/dev/null || true"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const frontendPort = parseInt(process.env.FRONTEND_PORT || '8080', 10);
+const frontendPort = parseInt(process.env.FRONTEND_PORT || '8090', 10);
 const frontendHost = process.env.FRONTEND_HOST || '0.0.0.0';
 const backendUrl = process.env.BACKEND_URL || 'http://localhost:3002';
 const frontendUrl = new URL(

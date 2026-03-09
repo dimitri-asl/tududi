@@ -58,9 +58,9 @@ const config = {
               origin.trim()
           )
         : [
-              'http://localhost:8080',
+              'http://localhost:8090',
               'http://localhost:9292',
-              'http://127.0.0.1:8080',
+              'http://127.0.0.1:8090',
               'http://127.0.0.1:9292',
           ],
 
@@ -76,7 +76,7 @@ const config = {
 
     environment,
 
-    frontendUrl: process.env.FRONTEND_URL || 'http://localhost:8080',
+    frontendUrl: process.env.FRONTEND_URL || 'http://localhost:8090',
 
     backendUrl: process.env.BACKEND_URL || 'http://localhost:3002',
 

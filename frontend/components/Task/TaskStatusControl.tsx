@@ -7,6 +7,7 @@ import {
     ClockIcon,
     XCircleIcon,
     CalendarIcon,
+    EyeIcon,
 } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
 import { Task, StatusType } from '../../entities/Task';
@@ -39,6 +40,7 @@ const quickStartStatuses = new Set([
     'not_started',
     'planned',
     'waiting',
+    'review',
     'cancelled',
 ]);
 
@@ -224,6 +226,17 @@ const TaskStatusControl: React.FC<TaskStatusControlProps> = ({
                 inactiveIconClass: 'text-yellow-500 dark:text-yellow-400',
             },
             {
+                value: 'review',
+                label: t('task.status.review', 'Review'),
+                Icon: EyeIcon,
+                activeClasses:
+                    'bg-orange-100 dark:bg-orange-900/50 text-orange-900 dark:text-orange-100 font-semibold border-l-2 border-orange-500 dark:border-orange-400',
+                inactiveClasses:
+                    'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800',
+                activeIconClass: 'text-orange-600 dark:text-orange-300',
+                inactiveIconClass: 'text-orange-500 dark:text-orange-400',
+            },
+            {
                 value: 'cancelled',
                 label: t('task.status.cancelled', 'Cancelled'),
                 Icon: XCircleIcon,
@@ -317,6 +330,10 @@ const TaskStatusControl: React.FC<TaskStatusControlProps> = ({
         waiting: {
             label: t('task.status.waiting', 'Waiting'),
             Icon: ClockIcon,
+        },
+        review: {
+            label: t('task.status.review', 'Review'),
+            Icon: EyeIcon,
         },
         cancelled: {
             label: t('task.status.cancelled', 'Cancelled'),

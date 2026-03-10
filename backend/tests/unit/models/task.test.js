@@ -77,6 +77,7 @@ describe('Task Model', () => {
             expect(Task.STATUS.DONE).toBe(2);
             expect(Task.STATUS.ARCHIVED).toBe(3);
             expect(Task.STATUS.WAITING).toBe(4);
+            expect(Task.STATUS.REVIEW).toBe(7);
         });
     });
 

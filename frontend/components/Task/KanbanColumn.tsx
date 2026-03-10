@@ -64,6 +64,7 @@ const STATUS_LABELS: Record<StatusKey, { key: string; fallback: string }> = {
     planned: { key: 'task.status.planned', fallback: 'Planned' },
     in_progress: { key: 'task.status.inProgress', fallback: 'In progress' },
     waiting: { key: 'task.status.waiting', fallback: 'Waiting' },
+    review: { key: 'task.status.review', fallback: 'Review' },
     done: { key: 'task.status.done', fallback: 'Done' },
     archived: { key: 'task.status.archived', fallback: 'Archived' },
     cancelled: { key: 'task.status.cancelled', fallback: 'Cancelled' },

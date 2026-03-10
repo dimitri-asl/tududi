@@ -50,7 +50,8 @@ export type StatusType =
     | 'archived'
     | 'waiting'
     | 'cancelled'
-    | 'planned';
+    | 'planned'
+    | 'review';
 export type PriorityType = 'low' | 'medium' | 'high' | null | undefined;
 export type RecurrenceType =
     | 'none'

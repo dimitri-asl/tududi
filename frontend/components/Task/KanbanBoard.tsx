@@ -21,6 +21,7 @@ const KANBAN_COLUMNS: StatusKey[] = [
     'planned',
     'in_progress',
     'waiting',
+    'review',
     'done',
 ];
 
@@ -29,6 +30,7 @@ const STATUS_KEY_TO_VALUE: Record<StatusKey, string | number> = {
     planned: 'planned',
     in_progress: 'in_progress',
     waiting: 'waiting',
+    review: 'review',
     done: 'done',
     archived: 'archived',
     cancelled: 'cancelled',
@@ -69,6 +71,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
             planned: [],
             in_progress: [],
             waiting: [],
+            review: [],
             done: [],
             archived: [],
             cancelled: [],

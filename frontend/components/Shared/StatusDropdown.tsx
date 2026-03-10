@@ -8,6 +8,7 @@ import {
     CalendarIcon,
     PlayIcon,
     XCircleIcon,
+    EyeIcon,
 } from '@heroicons/react/24/outline';
 import { StatusType } from '../../entities/Task';
 import { useTranslation } from 'react-i18next';
@@ -49,6 +50,13 @@ const StatusDropdown: React.FC<StatusDropdownProps> = ({ value, onChange }) => {
             label: t('status.waiting', 'Waiting'),
             icon: (
                 <ClockIcon className="w-5 h-5 text-yellow-500 dark:text-yellow-400" />
+            ),
+        },
+        {
+            value: 'review',
+            label: t('status.review', 'Review'),
+            icon: (
+                <EyeIcon className="w-5 h-5 text-orange-500 dark:text-orange-400" />
             ),
         },
         {

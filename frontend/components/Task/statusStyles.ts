@@ -7,7 +7,8 @@ type StatusKey =
     | 'archived'
     | 'waiting'
     | 'cancelled'
-    | 'planned';
+    | 'planned'
+    | 'review';
 
 interface StatusStyle {
     button: string;
@@ -26,6 +27,10 @@ const STATUS_STYLES: Record<StatusKey, StatusStyle> = {
     waiting: {
         button: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300',
         border: 'border-yellow-200 dark:border-yellow-800',
+    },
+    review: {
+        button: 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300',
+        border: 'border-orange-200 dark:border-orange-800',
     },
     done: {
         button: 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300',
@@ -53,6 +58,7 @@ export const resolveStatusKey = (status?: StatusType | number | null): StatusKey
     if (status === 'done' || status === 2) return 'done';
     if (status === 'archived' || status === 3) return 'archived';
     if (status === 'waiting' || status === 4) return 'waiting';
+    if (status === 'review' || status === 7) return 'review';
     if (status === 'cancelled' || status === 5) return 'cancelled';
     return 'not_started';
 };

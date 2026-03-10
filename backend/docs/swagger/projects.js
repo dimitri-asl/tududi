@@ -12,7 +12,7 @@
  *         name: status
  *         schema:
  *           type: string
- *           enum: [not_started, planned, in_progress, waiting, done, cancelled, all, not_completed]
+ *           enum: [not_started, planned, in_progress, waiting, review, done, cancelled, all, not_completed]
  *         description: Filter by project status
  *       - in: query
  *         name: area_id
@@ -64,7 +64,7 @@
  *                 description: Project priority
  *               status:
  *                 type: string
- *                 enum: [not_started, planned, in_progress, waiting, done, cancelled]
+ *                 enum: [not_started, planned, in_progress, waiting, review, done, cancelled]
  *                 description: Project status
  *               area_id:
  *                 type: integer
@@ -129,7 +129,7 @@
  *                 description: Project priority
  *               status:
  *                 type: string
- *                 enum: [not_started, planned, in_progress, waiting, done, cancelled]
+ *                 enum: [not_started, planned, in_progress, waiting, review, done, cancelled]
  *                 description: Project status
  *               area_id:
  *                 type: integer
